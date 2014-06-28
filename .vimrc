@@ -17,6 +17,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'bling/vim-airline'
+Bundle 'Lokaltog/vim-easymotion'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -40,6 +41,8 @@ set colorcolumn=80
 set laststatus=2
 set nu
 
+let mapleader=" " 
+
 noremap j h
 noremap k j
 noremap l k
@@ -52,4 +55,4 @@ colorscheme solarized
 
 command Nt NERDTree
 command Cp CtrlP
-:let NERDTreeQuitOnOpen = 1
+let NERDTreeQuitOnOpen = 1
