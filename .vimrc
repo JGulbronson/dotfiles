@@ -9,9 +9,11 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'wting/rust.vim'
 
 Bundle 'scrooloose/nerdtree'
-Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
@@ -34,25 +36,48 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-set tabstop=4
-set shiftwidth=4
-set expandtab
 set colorcolumn=80
-set laststatus=2
-set nu
 
-let mapleader=" " 
+let mapleader=","
 
-noremap j h
-noremap k j
-noremap l k
-noremap ; l
-
-" Set up Solarized
 syntax enable
 set background=dark
 colorscheme solarized
 
-command Nt NERDTree
-command Cp CtrlP
-let NERDTreeQuitOnOpen = 1
+set autoindent
+set clipboard=unnamed                                        " yank and paste with the system clipboard
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set ignorecase
+set encoding=utf-8
+set number
+set list                                                     " show trailing whitespace
+set listchars=tab:▸\ ,trail:▫
+set backspace=2
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <leader>l :Align
+nmap <leader>a :Ack
+nmap <leader>b :CtrlPBuffer<CR>
+nmap <leader>d :NERDTreeToggle<CR>
+nmap <leader>f :NERDTreeFind<CR>
+nmap <leader>t :CtrlP<CR>
+nmap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
+nmap <leader>] :TagbarToggle<CR>
+nmap <leader><space> :call whitespace#strip_trailing()<CR>
+nmap <leader>g :GitGutterToggle<CR>
+nmap <leader>c <Plug>Kwbd
+map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" plugin settings
+let g:ctrlp_match_window = 'order:ttb,max:20'
+let g:NERDSpaceDelims=1
+let g:gitgutter_enabled = 0
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
+nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
